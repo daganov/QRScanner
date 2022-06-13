@@ -3,22 +3,11 @@ import UIKit
 class MainViewController: UIViewController {
     
     var presenter: MainViewPresenterProtocol!
-    var videoLayer: CALayer?
     
-    let viewBackgroundLabel: UIView = {
-        let background = UIView()
-        background.backgroundColor = .black.withAlphaComponent(0.6)
-        background.layer.cornerRadius = 6
-        background.translatesAutoresizingMaskIntoConstraints = false
-        return background
-    }()
-    
-    let label: UILabel = {
-        let label = UILabel()
-        label.text = "Наведите камеру на QR-код"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    let viewBackgroundLabel = UIView().createBackground()
+    let label = UILabel().createLabel(text: "Наведите камеру на QR-код")
+    let viewBackgroundAlert = UIView().createBackground()
+    let imageAlert = UIImageView().createImage(with: "checkmark.circle")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +30,37 @@ class MainViewController: UIViewController {
         ])
     }
     
+    private func setupAlert() {
+        viewBackgroundAlert.addSubview(imageAlert)
+        view.addSubview(viewBackgroundAlert)
+
+        NSLayoutConstraint.activate([
+            imageAlert.centerXAnchor.constraint(equalTo: viewBackgroundAlert.centerXAnchor),
+            imageAlert.centerYAnchor.constraint(equalTo: viewBackgroundAlert.centerYAnchor),
+
+            viewBackgroundAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            viewBackgroundAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            viewBackgroundAlert.heightAnchor.constraint(equalTo: imageAlert.heightAnchor, constant: 40),
+            viewBackgroundAlert.widthAnchor.constraint(equalTo: imageAlert.widthAnchor, constant: 40)
+        ])
+    }
+        
     private func setupCamera() {
         presenter.showVideoFromCamera(frame: view.layer.bounds)
     }
 }
 
 extension MainViewController: MainViewProtocol {
+    func showSuccessfulScan(url: URL) {
+        DispatchQueue.main.async {
+            self.viewBackgroundLabel.isHidden = true
+            
+            self.view.addSubview(UIView().createBlurView(frame: self.view.bounds))
+
+            self.setupAlert()
+        }
+    }
+    
     func setCamera(video: CALayer) {
         view.layer.addSublayer(video)
         setupLabel()
