@@ -54,14 +54,46 @@
 		8B36E18428572FEA000BD791 /* QRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				8B36E18528572FEA000BD791 /* AppDelegate.swift */,
-				8B36E18728572FEA000BD791 /* SceneDelegate.swift */,
-				8B36E18928572FEA000BD791 /* ViewController.swift */,
+				8BC6DCCE28573F970046995E /* App */,
+				8BC6DCCB28573ED10046995E /* Model */,
+				8BC6DCCD28573EE10046995E /* View */,
+				8BC6DCCC28573ED90046995E /* Presenter */,
 				8B36E18E28572FEB000BD791 /* Assets.xcassets */,
 				8B36E19028572FEB000BD791 /* LaunchScreen.storyboard */,
 				8B36E19328572FEB000BD791 /* Info.plist */,
 			);
 			path = QRScanner;
+			sourceTree = "<group>";
+		};
+		8BC6DCCB28573ED10046995E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8BC6DCCC28573ED90046995E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8BC6DCCD28573EE10046995E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B36E18928572FEA000BD791 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8BC6DCCE28573F970046995E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8B36E18528572FEA000BD791 /* AppDelegate.swift */,
+				8B36E18728572FEA000BD791 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
