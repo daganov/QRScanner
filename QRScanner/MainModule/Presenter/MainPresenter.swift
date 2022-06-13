@@ -1,15 +1,6 @@
 import Foundation
 import UIKit
 
-protocol MainViewProtocol: AnyObject {
-    func setCamera(video: CALayer)
-}
-
-protocol MainViewPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, camera: CameraManager)
-    func showVideoFromCamera(frame: CGRect)
-}
-
 class MainPresenter: MainViewPresenterProtocol {
     let view: MainViewProtocol
     let camera: CameraManager
@@ -24,4 +15,13 @@ class MainPresenter: MainViewPresenterProtocol {
         view.setCamera(video: camera.video)
     }
     
+}
+
+extension MainPresenter: UpdateValueProtocol {
+    func updateValue(value: String) {
+        self.camera.session.stopRunning()
+        if let url = URL(string: value) {
+            view.showSuccessfulScan(url: url)
+        }
+    }
 }

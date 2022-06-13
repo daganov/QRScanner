@@ -3,8 +3,7 @@ import AVFoundation
 class QrHandler: NSObject {
     
     static let shared = QrHandler()
-    var value: String?
-    
+    var delegate: UpdateValueProtocol?
 }
 
 extension QrHandler: AVCaptureMetadataOutputObjectsDelegate {
@@ -18,7 +17,8 @@ extension QrHandler: AVCaptureMetadataOutputObjectsDelegate {
         else {
             return
         }
-        value = object.stringValue
-        print(object.stringValue ?? "")
+        guard let value = object.stringValue else { return }
+        delegate?.updateValue(value: value)
+        print(value)
     }
 }

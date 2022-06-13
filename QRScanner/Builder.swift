@@ -11,7 +11,8 @@ class ModelBuilder: Builder {
         
         let view = MainViewController()
         let presenter = MainPresenter(view: view, camera: model)
-        
+
+        QrHandler.shared.delegate = presenter
         view.presenter = presenter
         
         return view
