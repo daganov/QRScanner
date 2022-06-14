@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  QRScanner
-//
-//  Created by Denis Aganov on 13.06.2022.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -15,9 +8,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let controller = ViewController()
+        let mainVC = ModelBuilder.createMainModule()
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = controller
+        window?.rootViewController = mainVC
         window?.makeKeyAndVisible()
     }
 
