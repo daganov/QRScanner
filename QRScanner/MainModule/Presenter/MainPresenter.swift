@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 class MainPresenter: MainViewPresenterProtocol {
@@ -13,6 +12,10 @@ class MainPresenter: MainViewPresenterProtocol {
     func showVideoFromCamera(frame: CGRect) {
         camera.video.frame = frame
         view?.setCamera(video: camera.video)
+    }
+    
+    func startCamera() {
+        camera.session.startRunning()
     }
     
 }
