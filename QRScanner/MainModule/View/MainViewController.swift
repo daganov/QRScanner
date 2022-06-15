@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ControlCameraProtocol: AnyObject {
+    func startCamera()
+}
+
 class MainViewController: UIViewController {
     
     var presenter: MainViewPresenterProtocol!
@@ -8,11 +12,20 @@ class MainViewController: UIViewController {
     let label = UILabel().createLabel(text: "Наведите камеру на QR-код")
     let viewBackgroundAlert = UIView().createBackground()
     let imageAlert = UIImageView().createImage(with: "checkmark.circle")
-
+    let blurView = UIView().createBlurView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
             
         setupCamera()
+        setupLabel()
+        setupAlert()
+        
+        toggleStateView(isCameraOn: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        blurView.frame = view.bounds
     }
     
     private func setupLabel() {
@@ -32,11 +45,15 @@ class MainViewController: UIViewController {
     
     private func setupAlert() {
         viewBackgroundAlert.addSubview(imageAlert)
+        view.addSubview(blurView)
         view.addSubview(viewBackgroundAlert)
 
         NSLayoutConstraint.activate([
-            imageAlert.centerXAnchor.constraint(equalTo: viewBackgroundAlert.centerXAnchor),
-            imageAlert.centerYAnchor.constraint(equalTo: viewBackgroundAlert.centerYAnchor),
+            blurView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
+            imageAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
             viewBackgroundAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             viewBackgroundAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -48,23 +65,35 @@ class MainViewController: UIViewController {
     private func setupCamera() {
         presenter.showVideoFromCamera(frame: view.layer.bounds)
     }
+
+    func toggleStateView(isCameraOn: Bool) {
+        blurView.isHidden = isCameraOn
+        viewBackgroundAlert.isHidden = isCameraOn
+        viewBackgroundLabel.isHidden = !isCameraOn
+    }
 }
 
 extension MainViewController: MainViewProtocol {
     func showSuccessfulScan(url: URL) {
-        DispatchQueue.main.async {
-            self.viewBackgroundLabel.isHidden = true
+        DispatchQueue.main.async { [unowned self] in
+            toggleStateView(isCameraOn: false)
             
-            self.view.addSubview(UIView().createBlurView(frame: self.view.bounds))
-
-            self.setupAlert()
+            guard let webViewController = ModelBuilder.createWebModule(url: url) as? WebViewController else { return }
+            let navigationController = UINavigationController(rootViewController: webViewController)
+            webViewController.delegate = self
+            
+            self.present(navigationController, animated: true)
         }
     }
     
     func setCamera(video: CALayer) {
         view.layer.addSublayer(video)
-        setupLabel()
     }
-    
-    
+}
+
+extension MainViewController: ControlCameraProtocol {
+    func startCamera() {
+        toggleStateView(isCameraOn: true)
+        self.presenter.startCamera()
+    }
 }
