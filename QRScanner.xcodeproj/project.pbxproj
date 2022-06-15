@@ -15,13 +15,15 @@
 		8BC6DCD2285745270046995E /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6DCD1285745270046995E /* CameraManager.swift */; };
 		8BC6DCD428574FD10046995E /* QrHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6DCD328574FD10046995E /* QrHandler.swift */; };
 		8BC6DCD628575D610046995E /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6DCD528575D610046995E /* MainPresenter.swift */; };
-		8BC6DCD9285782FB0046995E /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6DCD8285782FB0046995E /* Builder.swift */; };
+		8BC6DCD9285782FB0046995E /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC6DCD8285782FB0046995E /* ModuleBuilder.swift */; };
 		8BF216762857A21700B4ADE0 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF216752857A21700B4ADE0 /* UIView+Ext.swift */; };
 		8BF216782857A34400B4ADE0 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF216772857A34400B4ADE0 /* UILabel+Ext.swift */; };
 		8BF2167A2857BB9200B4ADE0 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF216792857BB9200B4ADE0 /* UIImageView+Ext.swift */; };
 		8BF2167D2857C13A00B4ADE0 /* UpdateValueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2167C2857C13A00B4ADE0 /* UpdateValueProtocol.swift */; };
 		8BF2167F2857C17500B4ADE0 /* MainViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2167E2857C17500B4ADE0 /* MainViewPresenterProtocol.swift */; };
 		8BF216812857C18900B4ADE0 /* MainViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF216802857C18900B4ADE0 /* MainViewProtocol.swift */; };
+		8BF216852859AFF500B4ADE0 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF216842859AFF500B4ADE0 /* WebPresenter.swift */; };
+		8BF216872859B24A00B4ADE0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF216862859B24A00B4ADE0 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,13 +37,15 @@
 		8BC6DCD1285745270046995E /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		8BC6DCD328574FD10046995E /* QrHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrHandler.swift; sourceTree = "<group>"; };
 		8BC6DCD528575D610046995E /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
-		8BC6DCD8285782FB0046995E /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
+		8BC6DCD8285782FB0046995E /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		8BF216752857A21700B4ADE0 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		8BF216772857A34400B4ADE0 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		8BF216792857BB9200B4ADE0 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		8BF2167C2857C13A00B4ADE0 /* UpdateValueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateValueProtocol.swift; sourceTree = "<group>"; };
 		8BF2167E2857C17500B4ADE0 /* MainViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		8BF216802857C18900B4ADE0 /* MainViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewProtocol.swift; sourceTree = "<group>"; };
+		8BF216842859AFF500B4ADE0 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
+		8BF216862859B24A00B4ADE0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +80,9 @@
 			children = (
 				8BF216742857A1F800B4ADE0 /* Extensions */,
 				8BC6DCCE28573F970046995E /* App */,
-				8BC6DCD8285782FB0046995E /* Builder.swift */,
+				8BC6DCD8285782FB0046995E /* ModuleBuilder.swift */,
 				8BC6DCD7285782830046995E /* MainModule */,
+				8BF216822858FF3200B4ADE0 /* WebModule */,
 				8B36E18E28572FEB000BD791 /* Assets.xcassets */,
 				8B36E19028572FEB000BD791 /* LaunchScreen.storyboard */,
 				8B36E19328572FEB000BD791 /* Info.plist */,
@@ -158,6 +163,31 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		8BF216822858FF3200B4ADE0 /* WebModule */ = {
+			isa = PBXGroup;
+			children = (
+				8BF216882859B25400B4ADE0 /* View */,
+				8BF216832859AFDA00B4ADE0 /* Presenter */,
+			);
+			path = WebModule;
+			sourceTree = "<group>";
+		};
+		8BF216832859AFDA00B4ADE0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8BF216842859AFF500B4ADE0 /* WebPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8BF216882859B25400B4ADE0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8BF216862859B24A00B4ADE0 /* WebViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,17 +259,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF216762857A21700B4ADE0 /* UIView+Ext.swift in Sources */,
+				8BF216852859AFF500B4ADE0 /* WebPresenter.swift in Sources */,
 				8BF2167D2857C13A00B4ADE0 /* UpdateValueProtocol.swift in Sources */,
 				8BF216782857A34400B4ADE0 /* UILabel+Ext.swift in Sources */,
 				8BC6DCD428574FD10046995E /* QrHandler.swift in Sources */,
 				8BF2167F2857C17500B4ADE0 /* MainViewPresenterProtocol.swift in Sources */,
 				8B36E18A28572FEA000BD791 /* MainViewController.swift in Sources */,
-				8BC6DCD9285782FB0046995E /* Builder.swift in Sources */,
+				8BC6DCD9285782FB0046995E /* ModuleBuilder.swift in Sources */,
 				8B36E18628572FEA000BD791 /* AppDelegate.swift in Sources */,
 				8BF2167A2857BB9200B4ADE0 /* UIImageView+Ext.swift in Sources */,
 				8BF216812857C18900B4ADE0 /* MainViewProtocol.swift in Sources */,
 				8BC6DCD628575D610046995E /* MainPresenter.swift in Sources */,
 				8BC6DCD2285745270046995E /* CameraManager.swift in Sources */,
+				8BF216872859B24A00B4ADE0 /* WebViewController.swift in Sources */,
 				8B36E18828572FEA000BD791 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
