@@ -9,8 +9,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let mainVC = ModelBuilder.createMainModule()
+        let navigationController = UINavigationController(rootViewController: mainVC)
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = mainVC
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
