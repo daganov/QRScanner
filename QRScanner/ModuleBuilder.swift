@@ -22,7 +22,11 @@ class ModelBuilder: Builder {
     
     static func createWebModule(url: URL) -> UIViewController {
         let view = WebViewController()
-        let presenter = WebPresenter(view: view, url: url)
+        
+        let model = ShareManager()
+        model.delegate = view
+        
+        let presenter = WebPresenter(view: view, url: url, share: model)
         view.presenter = presenter
         return view
     }
