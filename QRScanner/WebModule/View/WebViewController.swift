@@ -47,7 +47,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     fileprivate func setupProgressBar() {
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.addSubview(progressBar)
         
         progressBar.progress = 0.1
@@ -61,7 +61,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
+        if keyPath == #keyPath(WKWebView.estimatedProgress) {
             print("Current progress: \(Int(webView.estimatedProgress * 100))%")
             if webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, animations: {
