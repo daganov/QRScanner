@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController, WKUIDelegate {
+class WebViewController: UIViewController {
     
     var webView = WKWebView()
     var progressBar = UIProgressView()
@@ -19,14 +19,15 @@ class WebViewController: UIViewController, WKUIDelegate {
         presenter.setUrl()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         delegate?.startCamera()
     }
     
     // MARK: - Setup controls
     fileprivate func setupNavigation() {
         let buttonDone = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneButtonAction))
-        let buttonShare = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: nil)
+        let buttonShare = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(shareButtonAction))
+        buttonShare.isEnabled = false
         
         navigationItem.leftBarButtonItem = buttonDone
         navigationItem.rightBarButtonItem = buttonShare
@@ -36,6 +37,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     fileprivate func setupWebView() {
         view.addSubview(webView)
+        webView.navigationDelegate = self
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -78,8 +80,24 @@ class WebViewController: UIViewController, WKUIDelegate {
 }
 
 extension WebViewController {
-    @objc func doneButtonAction(button: UIBarButtonItem) {
+    @objc func doneButtonAction() {
         dismiss(animated: true)
+    }
+    
+    @objc func shareButtonAction() {
+        presenter.showShareSheet()
+    }
+}
+
+extension WebViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+}
+
+extension WebViewController: PresentViewProtocol {
+    func showPresent(view: UIViewController) {
+        self.present(view, animated: true)
     }
 }
 
