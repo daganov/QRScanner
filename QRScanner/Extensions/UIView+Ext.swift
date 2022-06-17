@@ -9,10 +9,9 @@ extension UIView {
         return background
     }
     
-    func createBlurView(frame: CGRect) -> UIView {
+    func createBlurView() -> UIView {
         let blur = UIBlurEffect(style: .systemUltraThinMaterial)
         let blurView = UIVisualEffectView(effect: blur)
-        blurView.frame = frame
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return blurView
     }
