@@ -8,10 +8,12 @@ protocol Builder {
 class ModelBuilder: Builder {
     
     static func createMainModule() -> UIViewController {
+        let view = MainViewController()
+
         let model = CameraManager()
+        model.delegate = view
         model.setHandler(QrHandler.shared)
         
-        let view = MainViewController()
         let presenter = MainPresenter(view: view, camera: model)
 
         QrHandler.shared.delegate = presenter

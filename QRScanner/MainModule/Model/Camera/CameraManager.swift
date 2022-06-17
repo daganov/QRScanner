@@ -2,12 +2,19 @@ import AVFoundation
 
 class CameraManager {
     
+    enum Status {
+        case ready
+        case notready
+    }
+    
+    var statusCamera = Status.notready
+    
     let session = AVCaptureSession()
-    private let sessionQueue = DispatchQueue(label: "qrscanner.session")
-    
     let videoOutput = AVCaptureMetadataOutput()
-    
     var video = AVCaptureVideoPreviewLayer()
+    
+    private let sessionQueue = DispatchQueue(label: "qrscanner.session")
+    weak var delegate: ControlCameraProtocol?
     
     init() {
         configureCamera()
@@ -23,6 +30,7 @@ class CameraManager {
         let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
         guard let captureDevice = captureDevice else {
             print("No camera")
+            statusCamera = .notready
             return
         }
         
@@ -31,10 +39,14 @@ class CameraManager {
             if session.canAddInput(input) {
                 session.addInput(input)
             } else {
-                fatalError("Cannot add input")
+                print("Cannot add input")
+                statusCamera = .notready
+                return
             }
         } catch {
-            fatalError(error.localizedDescription)
+            print(error.localizedDescription)
+            statusCamera = .notready
+            return
         }
         
         if session.canAddOutput(videoOutput) {
@@ -46,12 +58,21 @@ class CameraManager {
     }
     
     private func configureCamera() {
-        // 1. Проверить права доступа
-        // 2. Сконфигурировать камеру
-        //        sessionQueue.async {
-        self.configureSession()
-        self.session.startRunning()
-        //        }
+        configureSession()
+        session.startRunning()
+        
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [unowned self] authorized in
+                self.statusCamera = authorized ? .ready : .notready
+                self.delegate?.showCameraStatus()
+            }
+        case .authorized:
+            statusCamera = .ready
+        default:
+            statusCamera = .notready
+            return
+        }
     }
     
     func setHandler(_ delegate: AVCaptureMetadataOutputObjectsDelegate) {
