@@ -18,6 +18,9 @@ class MainPresenter: MainViewPresenterProtocol {
         camera.session.startRunning()
     }
     
+    func cameraState() -> Bool {
+        camera.statusCamera == .ready
+    }
 }
 
 extension MainPresenter: UpdateValueProtocol {
